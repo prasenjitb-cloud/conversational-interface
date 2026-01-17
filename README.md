@@ -33,13 +33,13 @@ Make sure you have the following installed:
 {
   "message": "Hello"
 }
-
+```
 Response:
 ```json
 {
   "reply": "Hello"
 }
-
+```
 You can test this endpoint using:
 Postman,curl
 
