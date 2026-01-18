@@ -1,14 +1,16 @@
-# conversational-interface -Task1
-This contains the initial express backend setup for task 1.
+# conversational-interface 
+This contains the initial express backend setup.
 
 # Directory Structure
 ```text
 conversational-interface/
-├── server.js # Express server entry point
-├── package.json
-├── package-lock.json 
-├── .gitignore # Ignored files (node_modules)
-└── README.md # Project documentation
+├── client/
+│   └── index.html       # Frontend UI
+└── server/
+    ├── server.js        # Express logic
+    ├── package.json     
+    ├── package-lock.json
+    └── README.md        # Documentation
 
 Make sure you have the following installed:
 - Node.js (v16 or later):Download and install from [nodejs.org](https://nodejs.org/) and run the setup.
@@ -25,7 +27,16 @@ Make sure you have the following installed:
  Start the server using - node server.js
  The server runs on port 8000.
 
+ ### GET  `/chat`(for browser testing)
+ 
+ example:http://localhost:8000/chat?message=hi
 
+ Response:
+```json
+{
+  "reply": "hi"
+}
+```
  ### POST `/chat`
 
 **Request Body:**

@@ -16,6 +16,17 @@ app.post("/chat", (req, res) => {
   res.json({ reply: message });
 });
 
+app.get("/chat", (req, res) => {
+  const message = req.query.message;
+
+  if (!message) {
+    return res.json({ reply: "No message provided" });
+  }
+
+  res.json({ reply: message });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
