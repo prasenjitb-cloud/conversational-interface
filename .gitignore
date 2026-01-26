@@ -1,2 +1,4 @@
-server/node_modules/
-python-server/.venv/
+server/backend/node/node_modules/
+server/backend/python-server/.venv/
+server/backend/python-server/__pycache__
+lambda_build
