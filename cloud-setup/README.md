@@ -1,11 +1,11 @@
 # Cloud Setup (AWS EC2)
 
-This document describes how the conversational-interface backends are deployed on AWS EC2 using the Free Tier.
+This document describes how the conversational-interface backend and frontend is deployed on AWS EC2 using the Free Tier.
 
 A single EC2 instance is used to host:
 - Python (Flask) backend
 - Node.js (Express) backend
--frontend
+- Frontend
 
 Each backend and the frontend run on a different port.
 
@@ -16,7 +16,7 @@ Each backend and the frontend run on a different port.
 - Cloud Provider: AWS EC2
 - OS: Amazon Linux
 - Instance Type: Free Tier eligible
-- Public IP: 16.171.224.237
+- Public IP: 16.16.207.21
 
 ---
 
@@ -114,7 +114,7 @@ The Flask backend is deployed on AWS EC2 (Free Tier).
 
 ## Live Test URL
 GET:
-http://13.49.223.116:5000/chat?message=hello
+http://16.16.207.21:5000/chat?message=hello
 
 This endpoint is accessible from both desktop and mobile browsers.
 
@@ -156,12 +156,12 @@ node server.js
 The Node.js Server is deployed on AWS EC2 (Free Tier).
 
 - Cloud Provider: AWS EC2 (Amazon Linux)
-- Public IP: 13.49.223.116
+- Public IP: 16.16.207.21:8000
 - Port: 8000
 
 ### Live Test URL
 GET:
-http://13.49.223.116:8000/chat?message=hello
+http://16.16.207.21:8000/chat?message=hello
 
 This endpoint is accessible from both desktop and mobile browsers.
 
@@ -172,9 +172,27 @@ Port 8000 is enabled via EC2 Security Group inbound rules.
 Express is currently running as the primary server for the frontend UI and Node API.
 
 ## Deployment(Frontend)
--cd frontend 
+In the frontend folder
+Initialize npm(Creates package.json)
 ```
-python3 -m http.server 3000
+npm init -y
+```
+Install a Node based Server
+```
+npm install http-server
+```
+Inside package.json change:-
+```
+"scripts": {
+  "start": "http-server -p 3000"
+}
+```
+
+On the EC2 instance,click on Connect and:-
+```
+cd frontend
+npm install
+npm start &
 ```
 
 ## AWS Setup Steps for Node
