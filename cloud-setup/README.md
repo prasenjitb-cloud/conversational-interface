@@ -4,10 +4,10 @@ This document describes how the conversational-interface backend and frontend is
 
 A single EC2 instance is used to host:
 - Python (Flask) backend
-- Node.js (Express) backend
+- Node.js (Express) 
 - Frontend
 
-Each backend and the frontend run on a different port.
+ Backend and the frontend run on a different port.
 
 ---
 
@@ -16,7 +16,7 @@ Each backend and the frontend run on a different port.
 - Cloud Provider: AWS EC2
 - OS: Amazon Linux
 - Instance Type: Free Tier eligible
-- Public IP: 16.16.207.21
+
 
 ---
 
@@ -27,9 +27,9 @@ The following inbound rules are enabled on the EC2 Security Group:
 | Port | Service              | Purpose       |
 |-----:|----------------------|-------------  |
 | 5000 | Python Flask Backend | `/chat` API   |
-| 8000 | Node.js Backend      | `/chat` API   |
+| 8000 | Node.js Frontend     | `/chat` API   |
 | 22   |  SSH                 |Remote Terminal|
-|3000  |Frontend              |               |
+|3000  |Frontend              |  UI Access    |
 
 Source for all ports: 0.0.0.0/0
 
@@ -87,7 +87,7 @@ cd conversational-interface
 ```
 
 
-## Deployment (Python Backend)
+### Deployment (Python Backend)
 
 Run these commands :-
 ```
@@ -105,16 +105,22 @@ cd backend
 cd python-server
 python3 app.py
 ```
+## Run using nohup to keep the process alive after logout
+```
+nohup python3 app.py > flask.log 2>&1 &
+```
 
 The Flask backend is deployed on AWS EC2 (Free Tier).
 
 - Cloud Provider: AWS EC2 (Amazon Linux)
-- Public IP: 13.49.223.116
+- Public IP: 16.16.207.21
 - Port: 5000
 
 ## Live Test URL
 GET:
 http://16.16.207.21:5000/chat?message=hello
+
+This url is used to test Flask Backend API.
 
 This endpoint is accessible from both desktop and mobile browsers.
 
@@ -163,6 +169,8 @@ The Node.js Server is deployed on AWS EC2 (Free Tier).
 GET:
 http://16.16.207.21:8000/chat?message=hello
 
+This url is used to test Node.
+
 This endpoint is accessible from both desktop and mobile browsers.
 
 
@@ -171,7 +179,7 @@ Port 8000 is enabled via EC2 Security Group inbound rules.
 
 Express is currently running as the primary server for the frontend UI and Node API.
 
-## Deployment(Frontend)
+### Deployment(Frontend)
 In the frontend folder
 Initialize npm(Creates package.json)
 ```
@@ -194,12 +202,14 @@ cd frontend
 npm install
 npm start &
 ```
+### Live Test URL
+GET:
+http://16.16.207.21:3000
 
-## AWS Setup Steps for Node
-1. Installed Node.js and npm on the existing EC2 instance (16.171.224.237).
-2. Enabled inbound rule for port 8000 in the AWS Security Group.
-3. Installed required packages using npm install.
-4. Started the Node server using node server.js.
+This url is used to test the frontend.
+
+
+
 
 ## Note 
  If the instance is stopped and started, the Public IP will change.
