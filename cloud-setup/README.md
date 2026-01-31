@@ -92,7 +92,6 @@ Run these commands :-
 sudo yum update -y
 sudo yum install python3 -y
 sudo yum install python3-pip -y
-pip3 install flask
 pip3 install -r requirements.txt
 
 ```
