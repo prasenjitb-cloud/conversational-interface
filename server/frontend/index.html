@@ -110,6 +110,7 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     
     <script type="text/babel">
+      const Backend_url= "http://16.16.207.21:5000/chat";
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState('');
 
@@ -127,7 +128,7 @@
           setInputText('');
 
           try {
-            const response = await fetch('http://13.53.36.22:5000/chat', {
+            const response = await fetch(Backend_url, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ message: inputText })
