@@ -5,8 +5,9 @@ This document describes how the conversational-interface backends are deployed o
 A single EC2 instance is used to host:
 - Python (Flask) backend
 - Node.js (Express) backend
+-frontend
 
-Each backend runs on a different port.
+Each backend and the frontend run on a different port.
 
 ---
 
@@ -28,8 +29,9 @@ The following inbound rules are enabled on the EC2 Security Group:
 | 5000 | Python Flask Backend | `/chat` API   |
 | 8000 | Node.js Backend      | `/chat` API   |
 | 22   |  SSH                 |Remote Terminal|
+|3000  |Frontend              |               |
 
-Source for both ports: 0.0.0.0/0
+Source for all ports: 0.0.0.0/0
 
 ## AWS Account & EC2 Instance Creation
 
@@ -107,12 +109,12 @@ python3 app.py
 The Flask backend is deployed on AWS EC2 (Free Tier).
 
 - Cloud Provider: AWS EC2 (Amazon Linux)
-- Public IP: 16.171.224.237
+- Public IP: 13.49.223.116
 - Port: 5000
 
 ## Live Test URL
 GET:
-http://16.171.224.237:5000/chat?message=hello
+http://13.49.223.116:5000/chat?message=hello
 
 This endpoint is accessible from both desktop and mobile browsers.
 
@@ -154,12 +156,12 @@ node server.js
 The Node.js Server is deployed on AWS EC2 (Free Tier).
 
 - Cloud Provider: AWS EC2 (Amazon Linux)
-- Public IP: 16.171.224.237
+- Public IP: 13.49.223.116
 - Port: 8000
 
 ### Live Test URL
 GET:
-http://16.171.224.237:8000/chat?message=hello
+http://13.49.223.116:8000/chat?message=hello
 
 This endpoint is accessible from both desktop and mobile browsers.
 
@@ -168,6 +170,12 @@ This endpoint is accessible from both desktop and mobile browsers.
 Port 8000 is enabled via EC2 Security Group inbound rules.
 
 Express is currently running as the primary server for the frontend UI and Node API.
+
+## Deployment(Frontend)
+-cd frontend 
+```
+python3 -m http.server 3000
+```
 
 ## AWS Setup Steps for Node
 1. Installed Node.js and npm on the existing EC2 instance (16.171.224.237).
